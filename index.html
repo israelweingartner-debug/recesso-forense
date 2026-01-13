@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Recesso Forense 2026</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: #f2f4f8;
+      color: #111;
+    }
+    .box {
+      background: #fff;
+      padding: 32px;
+      border-radius: 14px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,.08);
+      width: 90%;
+      max-width: 420px;
+    }
+    h1 {
+      margin-bottom: 12px;
+      font-size: 22px;
+    }
+    .dias {
+      font-size: 64px;
+      font-weight: 800;
+      margin: 16px 0;
+    }
+    .texto {
+      color: #444;
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>Recesso Forense 2026</h1>
+    <div class="dias" id="dias">—</div>
+    <div class="texto" id="texto">Calculando…</div>
+  </div>
+
+  <script>
+    const inicio = new Date(2026, 11, 20);
+
+    function inicioDoDia(d) {
+      d = new Date(d);
+      d.setHours(0,0,0,0);
+      return d;
+    }
+
+    function atualizar() {
+      const hoje = inicioDoDia(new Date());
+      const alvo = inicioDoDia(inicio);
+      const msDia = 24 * 60 * 60 * 1000;
+      const diff = Math.round((alvo - hoje) / msDia);
+
+      const diasEl = document.getElementById("dias");
+      const textoEl = document.getElementById("texto");
+
+      if (diff > 0) {
+        diasEl.textContent = diff;
+        textoEl.textContent = diff === 1 ? "Falta 1 dia." : `Faltam ${diff} dias.`;
+      } else if (diff === 0) {
+        diasEl.textContent = "0";
+        textoEl.textContent = "É hoje. Bom recesso!";
+      } else {
+        diasEl.textContent = diff;
+        textoEl.textContent = "O recesso já começou.";
+      }
+    }
+
+    atualizar();
+    setInterval(atualizar, 60000);
+  </script>
+</body>
+</html>
